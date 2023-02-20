@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Input, Col, Row, Slider } from 'antd';
+import { Input } from 'antd';
 import { Image } from 'antd';
 import axios from 'axios'
 import './index.css'
