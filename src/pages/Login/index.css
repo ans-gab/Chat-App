@@ -12,7 +12,7 @@
   text-align: center;
   margin-top: 10.75rem;
   font-weight: 200;
-  font-size: 3.0625rem;
+  font-size: 1.875rem;
 }
 .table {
   width: 80%;
@@ -21,11 +21,30 @@
   margin-top: 8.4375rem
 }
 .login-form-forgot{
-  color:#fff
+  color:#fff;
+  margin:0 1.25rem;
 }
 .login-form-button{
   background-color: #397bcc00;
   border: 1px solid #fff;
   border-radius: 10rem;
-
+}
+input-login {
+  border-color: aliceblue;
+}
+.ant-input-affix-wrapper,.ant-input{
+  background: #f7f7f700 !important;
+  border-color: #fff;
+  color: #fff;
+  border-radius: 1.25rem
+}
+.ant-input-affix-wrapper:hover{
+  border-color: #fff !important;
+}
+input::-webkit-input-placeholder{
+  color: #e6e6e6 !important;
+  font-size: .875rem;
+}
+.ant-form-item-control-input-content {
+  text-align: center;
 }

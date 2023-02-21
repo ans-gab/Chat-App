@@ -5,6 +5,7 @@ import Question from "../pages/Question";
 import Createimg from "../pages/Createimg";
 import Mine from "../pages/Mine";
 import Login from "../pages/Login";
+import Register from "../pages/Register";
 
 // 注意！！！ element 的首字母一定要是小写，否则不会生效
 const routes = [
@@ -31,6 +32,9 @@ const routes = [
   {
     path: "login",
     element: <Login />
+  },{
+    path:"sign-up",
+    element:<Register/>
   }
 ]
 

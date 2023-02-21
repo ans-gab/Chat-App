@@ -10,7 +10,7 @@ const Question = () => {
   }]);
   const [inputValue, setInputValue] = useState('');
   const [btnmsg, setBtnmsg] = useState('发送');
-  const [api, setApi] = useState('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')
+  const [api, setApi] = useState('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')
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);

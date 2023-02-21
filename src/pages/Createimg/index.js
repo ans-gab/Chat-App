@@ -9,7 +9,7 @@ const Createimg = () => {
   const [imgdes, setImgDes] = useState('');
   const [imglist, setImglist] = useState([]);
   const [isloading, setLoading] = useState();
-  const [api, setApi] = useState('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')
+  const [api, setApi] = useState('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')
   const handleInputChange = (event) => {
     setImgDes(event.target.value);
   };
@@ -19,7 +19,7 @@ const Createimg = () => {
     }
     setLoading(true)
     axios.post('https://api.openai.com/v1/images/generations', {
-      prompt: imgdes, n: 9, size: "256x256"
+      prompt: imgdes, n: 2, size: "256x256"
     }, {
       headers: { 'content-type': 'application/json', 'Authorization': 'Bearer ' + api }
     }).then(res => {
