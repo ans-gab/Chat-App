@@ -15,7 +15,7 @@
 }
 
 .outgoing {
-  font-size: 1.1875rem;
+  font-size: .9375rem;
   display: flex;
   justify-content: flex-end;
   max-width: 80%;
@@ -23,7 +23,7 @@
 }
 
 .ingoing {
-  font-size: 1.1875rem;
+  font-size: .9375rem;
   display: flex;
   justify-content: flex-end;
   max-width: 80%;
@@ -39,7 +39,8 @@
   max-width: 75%;
   word-break: break-all;
   margin-top: .625rem;
-  margin-right: .625rem
+  margin-right: .625rem;
+  padding: .625rem
 }
 
 .incoming-message {
@@ -51,7 +52,8 @@
   max-width: 75%;
   word-break: break-all;
   margin-top: .625rem;
-  margin-left: .625rem
+  margin-left: .625rem;
+  padding: .625rem
 }
 
 .outgoing img,

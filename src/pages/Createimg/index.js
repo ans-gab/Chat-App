@@ -30,8 +30,8 @@ const Createimg = () => {
   };
   return (
     <div>
-      <div className='top-bar'>
-        <Search disabled={isloading} placeholder="输入图片的描述" enterButton onChange={handleInputChange} onPressEnter={handleDialogInput} loading={isloading} />
+      <div className='bottom-bar'>
+        <Search style={{width:"100%"}} disabled={isloading} placeholder="输入图片的描述" enterButton onChange={handleInputChange} onPressEnter={handleDialogInput} loading={isloading} />
       </div>
       <div className="img-group">
 
@@ -43,8 +43,6 @@ const Createimg = () => {
               )
             })
           }
-
-
         </Image.PreviewGroup>
 
       </div>

@@ -1,6 +1,7 @@
 import React from 'react'
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input, Select, Row, Col } from 'antd';
+import { Link } from 'react-router-dom';
+import { LockOutlined, UserOutlined,SwapLeftOutlined} from '@ant-design/icons';
+import { Button,  Form, Input, Select, Row, Col} from 'antd';
 import './index.css'
 const { Option } = Select
 const Register = () => {
@@ -27,15 +28,15 @@ const Register = () => {
   };
   return (
     <div className='register-content'>
+      <Link to="/login">
+      <SwapLeftOutlined  style={{color:"white",marginLeft: "1.25rem"}}/>
+      </Link>
       <div className="sign-title">欢迎来到摇滚熊</div>
       <div className="sign-table">
       <Form className="login-form">
         <Form.Item name="nickname" rules={[{ required: true, message: '请输入你的昵称!', whitespace: true }]}>
           <Input size='large' prefix={<UserOutlined className="site-form-item-icon"/>} placeholder="昵称" />
         </Form.Item>
-
-        
-
         <Form.Item  name="password"  rules={[{required: true,message: 'Please input your password!',},]} hasFeedback>
           <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} placeholder="密码" />
         </Form.Item>
@@ -57,14 +58,8 @@ const Register = () => {
         >
           <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} placeholder="确认密码" />
         </Form.Item>
-        <Form.Item  name="gender" rules={[{ required: true, message: '请选择性别' }]}>
-          <Select placeholder="请选择性别">
-            <Option value="1">男</Option>
-            <Option value="2">女</Option>
-          </Select>
-        </Form.Item>
         <Form.Item name="phone" rules={[{ required: true, message: '请输入手机号码!' }]}>
-          <Input addonBefore={prefixSelector} style={{ width: '100%' }} placeholder="手机号码" />
+          <Input addonBefore={prefixSelector} style={{ width: '100%' }} placeholder="请输入手机号码" />
         </Form.Item>
         <Form.Item extra="我们必须确保你是个真实的人类">
           <Row gutter={8}>

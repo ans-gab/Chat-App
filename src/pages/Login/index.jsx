@@ -1,8 +1,9 @@
 import React from 'react'
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
 import './index.css'
 import { Link } from 'react-router-dom';
+
 const Login = () => {
   return (
     <div className='login-content'>

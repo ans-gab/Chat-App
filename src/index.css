@@ -104,3 +104,9 @@ span.ant-select-selection-search {
 :where(.css-dev-only-do-not-override-diro6f).ant-btn-default:disabled {
   color: rgb(255 255 255 / 55%);
 }
+
+/* 输入框提示文本样式 */
+input::-webkit-input-placeholder{
+  color: #797979 !important;
+  font-size: .875rem;
+}

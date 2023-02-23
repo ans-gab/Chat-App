@@ -1,6 +1,9 @@
-.top-bar {
+.bottom-bar {
   margin: 0px;
   padding: .8125rem;
+  position: fixed;
+  bottom: 3.125rem;
+  width: 93%;
 }
 
 .img-item {

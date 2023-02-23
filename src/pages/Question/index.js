@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
 import { Input, Button } from 'antd'
 import axios from 'axios'
+import Reply from '../../commponent/Reply';
+import { changeDiologList, changeReply } from '../../store/actionCreators';
+import { connect } from 'react-redux'
 import './index.css'
 
-const Question = () => {
-  const [dialogList, setDialogList] = useState([{
-    text: '你好，我是智能聊天机器人，你可以问我任何问题',
-    type: 'ingoing'
-  }]);
+const Question = (props) => {
+
   const [inputValue, setInputValue] = useState('');
   const [btnmsg, setBtnmsg] = useState('发送');
-  const [api, setApi] = useState('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')
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -20,22 +19,24 @@ const Question = () => {
     if (inputValue.trim() === '') {
       return;
     }
-    const newDialogList = [...dialogList, {
+
+    const newDiologList = [...props.diologlist, {
       text: inputValue,
       type: 'outgoing',
+      isreply: 0
     }];
-    setDialogList(newDialogList);
+    props.setDialogList(newDiologList);
     setInputValue('');
     setBtnmsg('请求中');
     axios.post('https://api.openai.com/v1/completions', {
-      prompt: inputValue, max_tokens: 2048, model: "text-davinci-003"
+      prompt: inputValue, max_tokens: 2048, model: "text-davinci-003", temperature: 0.2
     }, {
-      headers: { 'content-type': 'application/json', 'Authorization': 'Bearer ' + api }
+      headers: { 'content-type': 'application/json', 'Authorization': 'Bearer ' + props.api }
     }).then(res => {
       console.log('res:', res);
       let text = res.data.choices[0].text.replace("openai:", "").replace("openai：", "").replace(/(^！\n\n)/g, "").replace(/^\n|\n$/g, "")
       console.log('text:', text);
-      setDialogList([...newDialogList, { text, type: 'ingoing' }])
+      props.setDialogList([...newDiologList, { text, type: 'ingoing' }])
       setBtnmsg('发送')
     })
   };
@@ -43,27 +44,34 @@ const Question = () => {
   return (
     <div>
       <div className='dialog-list'>
-        {
-          dialogList.map((item) => {
-            return (
-              <div className='list-msg'>
-                {item.type === 'outgoing'
-                  ? <div className='outgoing'><div className="outgoing-message">{item.text}</div><div><img src={require('../../assets/img/avatar.jpg')} alt="我的头像" /></div></div>
-                  : <div className='ingoing'><div><img src={require('../../assets/img/avatar-2.jpg')} alt="我的头像" /></div><div className="incoming-message">{item.text}</div></div>
-                }
-              </div>
-            )
-          })
-        }
+        <Reply />
       </div>
       <div className='input-form'>
         <Input.Group compact className='input-form' >
-          <Input placeholder='你可以问我任何问题' disabled={btnmsg === "请求中"} style={{ width: 'calc(100% - 5rem)' }} type="text" value={inputValue} onChange={handleInputChange} onPressEnter={handleDialogInput} />
+          <Input placeholder='你可以问我任何问题' disabled={btnmsg === "请求中"} style={{ width: 'calc(100% - 5rem)', color: "#00bcd4" }} type="text" value={inputValue} onChange={handleInputChange} onPressEnter={handleDialogInput} />
           <Button disabled={btnmsg === "请求中"} style={{ width: '5rem' }} onClick={handleDialogInput}>{btnmsg}</Button>
         </Input.Group>
       </div>
     </div>
   )
 }
+const mapStateToProps = state => {
+  return {
+    isreply: state.isreply,
+    diologlist: state.diologlist,
+    api: state.apikey
+  }
+}
+const mapDishpatchToProps = dispatch => {
+  return {
+    setReply: function (num) {
+      dispatch(changeReply(num))
+    },
+    setDialogList: function (ary) {
+      dispatch(changeDiologList(ary))
+    }
 
-export default Question
+  }
+
+}
+export default connect(mapStateToProps, mapDishpatchToProps)(Question) 
