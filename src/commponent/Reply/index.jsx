@@ -1,5 +1,6 @@
 import React from 'react'
 import { Typography } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 import { changeReply } from '../../store/actionCreators';
 import { connect } from 'react-redux'
 
@@ -17,10 +18,11 @@ const Reply = (props) => {
                 : <div className='ingoing'>
                   <div><img src={require('../../assets/img/avatar-2.jpg')} alt="机器人头像" /></div>
                   <div className="incoming-message">
-
-                    {props.isreply === 0 ?
-                      <Paragraph style={{ color: '#00bcd4', marginBottom: '0' }}>{item.text}</Paragraph> :
-                      <Paragraph style={{ color: '#00bcd4', marginBottom: '0' }} copyable={{ text: item.text, tooltips: ['复制', '复制成功'], color: 'white' }}>{item.text}</Paragraph>
+                    {item.isloading ?
+                      <LoadingOutlined /> :
+                      item.text.length <= 30 ?
+                        <Paragraph style={{ color: '#00bcd4', marginBottom: '0' }}>{item.text}</Paragraph> :
+                        <Paragraph style={{ color: '#00bcd4', marginBottom: '0' }} copyable={{ text: item.text, tooltips: ['复制', '复制成功'], color: 'white' }}>{item.text}</Paragraph>
                     }
                   </div>
                 </div>
@@ -36,7 +38,8 @@ const Reply = (props) => {
 const mapStateToProps = state => {
   return {
     diologlist: state.diologlist,
-    isreply: state.isreply
+    isreply: state.isreply,
+    loading: state.loading
   }
 }
 const mapDispatchToProps = dispatch => {

@@ -1,0 +1,6 @@
+.mode-title {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  background-color: aliceblue;
+}

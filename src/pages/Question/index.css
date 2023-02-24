@@ -40,7 +40,8 @@
   word-break: break-all;
   margin-top: .625rem;
   margin-right: .625rem;
-  padding: .625rem
+  padding: 0 .625rem;
+  padding-top: .3125rem
 }
 
 .incoming-message {
@@ -64,7 +65,7 @@
 }
 
 .dialog-list {
-  height: 84vh;
+  height: 78vh;
   padding: .625rem;
   overflow: auto;
 }
