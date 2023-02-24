@@ -3,7 +3,7 @@
   left: 0;
   right: 0;
   bottom: 0em;
-  background: #fdfdfd;
+  background: #01081a;
   box-shadow: 0px -1px 0px #828485
 }
 
@@ -26,7 +26,7 @@ ul.footer-ul {
 }
 
 .footer-ul-li.active {
-  color: #4caf50;
+  color: #0ce7ff;
 }
 
 .footer-ul-li span {
@@ -35,7 +35,7 @@ ul.footer-ul {
 }
 
 .footer-ul-li.active span {
-  color: #4caf50;
+  color: #0ce7ff;
 }
 
 .footer-ul-li img {
