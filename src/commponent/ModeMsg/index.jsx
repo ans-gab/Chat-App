@@ -1,9 +1,14 @@
 import React from 'react'
 import { Select } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux'
 import './index.css'
-import { changeMode } from '../../store/actionCreators';
+import { changeMode, changeRequest } from '../../store/actionCreators';
 const ModeMsg = (props) => {
+  // 改变请求参数
+  const setParms = () => {
+    console.log('改变了请求参数');
+  }
   return (
     <div className='mode-title'>
       <Select defaultValue={props.mode} style={{ width: 100, color: '#0c0c0c' }}
@@ -13,19 +18,24 @@ const ModeMsg = (props) => {
           { value: 1, label: '聊天模式' },
         ]}
       />
+      <UserOutlined onClick={setParms} style={{ fontSize: 26, color: '#FFFFFF' }} />
     </div>
   )
 }
 
 const mapStateToProps = state => {
   return {
-    mode: state.mode
+    mode: state.mode,
+    requestdata: state.requestdata
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
     setMode: function (num) {
       dispatch(changeMode(num))
+    },
+    setRequestData: function (ary) {
+      dispatch(changeRequest(ary))
     }
   }
 }

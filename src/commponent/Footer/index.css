@@ -3,8 +3,10 @@
   left: 0;
   right: 0;
   bottom: 0em;
-  background: #01081a;
-  box-shadow: 0px -1px 0px #828485
+  background: #ffffff;
+  box-shadow: 0px -1px 10px #828485;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 ul.footer-ul {
@@ -26,16 +28,16 @@ ul.footer-ul {
 }
 
 .footer-ul-li.active {
-  color: #0ce7ff;
+  color: #00adae;
 }
 
 .footer-ul-li span {
   color: #8a8a8a;
-  font-size: 1rem;
+  font-size: .875rem;
 }
 
 .footer-ul-li.active span {
-  color: #0ce7ff;
+  color: #00adae;
 }
 
 .footer-ul-li img {
