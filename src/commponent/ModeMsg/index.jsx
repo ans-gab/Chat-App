@@ -1,7 +1,8 @@
 import React from 'react'
 import { Select } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+
 import { connect } from 'react-redux'
+import RequestParams from './RequestParams';
 import './index.css'
 import { changeMode, changeRequest } from '../../store/actionCreators';
 const ModeMsg = (props) => {
@@ -18,7 +19,7 @@ const ModeMsg = (props) => {
           { value: 1, label: '聊天模式' },
         ]}
       />
-      <UserOutlined onClick={setParms} style={{ fontSize: 26, color: '#FFFFFF' }} />
+      <RequestParams />
     </div>
   )
 }

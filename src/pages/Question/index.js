@@ -61,7 +61,7 @@ const Question = (props) => {
       <Reply />
       <div className='input-form'>
         <Input.Group compact className='input-form' >
-          <Input placeholder='你可以问我任何问题' disabled={btnmsg === "请求中"} style={{ width: 'calc(100% - 5rem)', color: "#00adae", borderColor: "#00adae" }} type="text" value={inputValue} onChange={handleInputChange} onPressEnter={handleDialogInput} />
+          <Input placeholder='你可以问我任何问题' disabled={btnmsg === "请求中"} style={{ width: 'calc(100% - 5rem)' }} type="text" value={inputValue} onChange={handleInputChange} onPressEnter={handleDialogInput} />
           <Button disabled={btnmsg === "请求中"} style={{ width: '5rem', backgroundColor: "#00adae", color: "#ffffff" }} onClick={handleDialogInput}>{btnmsg}</Button>
         </Input.Group>
       </div>

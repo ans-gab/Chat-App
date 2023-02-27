@@ -5,15 +5,27 @@ import routes from './router';
 import { Provider } from 'react-redux';
 import './index.css'
 import store from './store';
-
+import { ConfigProvider } from 'antd';
 
 
 const App = () => {
   return (
     <div className="contain">
       <Provider store={store}>
-        {useRoutes(routes)}
-        <Footer></Footer>
+        <ConfigProvider theme={{
+          token: { colorPrimary: '#00adae', },
+          components: {
+            Radio: {
+              colorPrimary: '#00adae',
+            },
+            Input: {
+              colorPrimary: '#00adae',
+            },
+          },
+        }}>
+          {useRoutes(routes)}
+          <Footer></Footer>
+        </ConfigProvider>
       </Provider>
 
     </div>

@@ -6,9 +6,9 @@ const defaultState = {
   apikey: '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',  //API 密钥
   requestdata: {
     mode: 1,
-    model: "",     //请求类型
+    model: "text-davinci-003",     //请求类型
     prompt: "",    //语境
-    max_tokens: "",    //最大回复字数
+    max_tokens: "512",    //最大回复字数
     temperature: 1,   //输出结果随机性 0-2，数值越大随机结果就越大（胡说参数）
     top_p: 0.75,   //值越大随机性就约到，值越小准确性就越高
   },
