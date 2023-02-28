@@ -6,8 +6,6 @@ export const CHANGE_REPLY = "CHANGE_REPLY"
 export const CHANGE_DIOLOG_LIST = "CHANGE_DIOLOG_LIST"
 // api 密钥
 export const SET_API = "SET_API"
-// 变更对话模式
-export const CHANGE_MODE = "CHANGE_MODE"
 // 变更问题内容
 export const CHANGE_QUESTION = "CHANGE_QUESTION"
 // 改变请求参数
