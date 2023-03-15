@@ -1,6 +1,6 @@
 .mode-title {
   display: flex;
-  padding: 10px;
+  padding: .625rem;
   background-color: #666666;
   justify-content: space-between;
 }

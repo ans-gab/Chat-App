@@ -10,6 +10,7 @@ import { ConfigProvider } from 'antd';
 
 const App = () => {
   return (
+
     <div className="contain">
       <Provider store={store}>
         <ConfigProvider theme={{
@@ -27,8 +28,8 @@ const App = () => {
           <Footer></Footer>
         </ConfigProvider>
       </Provider>
-
     </div>
+
 
 
   )

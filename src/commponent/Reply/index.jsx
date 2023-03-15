@@ -21,8 +21,8 @@ const Reply = (props) => {
                     {item.isloading ?
                       <LoadingOutlined /> :
                       item.text.length <= 30 ?
-                        <Paragraph style={{ color: '#00bcd4', marginBottom: '0' }}>{item.text}</Paragraph> :
-                        <Paragraph style={{ color: '#00bcd4', marginBottom: '0' }} copyable={{ text: item.text, tooltips: ['复制', '复制成功'], color: 'white' }}>{item.text}</Paragraph>
+                        <Paragraph style={{ marginBottom: '0' }}>{item.text}</Paragraph> :
+                        <Paragraph style={{ marginBottom: '0' }} copyable={{ text: item.text, tooltips: ['复制', '复制成功'], color: 'white' }}>{item.text}</Paragraph>
                     }
                   </div>
                 </div>

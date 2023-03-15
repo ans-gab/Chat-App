@@ -8,9 +8,11 @@ const defaultState = {
     mode: 0,    //问答模式：0；聊天模式：1
     model: "text-davinci-003",     //请求类型
     prompt: "",    //语境
-    max_tokens: "512",    //最大回复字数
-    temperature: 1,   //输出结果随机性 0-2，数值越大随机结果就越大（胡说参数）
+    max_tokens: 512,    //最大回复字数
+    temperature: 1,   //输出结果随机性 0-1，数值越大随机结果就越大（胡说参数）
     top_p: 0.75,   //值越大随机性就约到，值越小准确性就越高
+    frequency_penalty: 0,    //-2-2,正值会根据新 tokens 在文本中的现有频率对其进行惩罚，从而降低模型逐字重复同一行的可能性，重复度惩罚因子
+    presence_penalty: 0    //  -2-2,正值会根据到目前为止是否出现在文本中来惩罚新 tokens，从而增加模型谈论新主题的可能性
   },
   question: '',  //问题内容
 }

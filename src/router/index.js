@@ -11,7 +11,7 @@ import Register from "../pages/Register";
 const routes = [
   {
     path: '/',
-    element: <Navigate to="/login" />
+    element: <Navigate to="/home" />
   },
   {
     path: "home",

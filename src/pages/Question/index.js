@@ -28,7 +28,7 @@ const Question = (props) => {
       isloading: true
     }];
 
-    if (props.mode === 0) {
+    if (props.requestdata.mode == 0) {
       props.setQuestion(inputValue)
       console.log(store.getState().question);
     }
@@ -42,16 +42,28 @@ const Question = (props) => {
     setInputValue('');
     setBtnmsg('请求中');
     axios.post('https://api.openai.com/v1/completions', {
-      prompt: store.getState().question, max_tokens: 2048, model: "text-davinci-003", temperature: 0.2
+      prompt: store.getState().question,
+      max_tokens: props.requestdata.max_tokens,
+      model: props.requestdata.model,
+      temperature: props.requestdata.temperature,
+      top_p: props.requestdata.top_p,
+      frequency_penalty: props.requestdata.frequency_penalty,
+      presence_penalty: props.requestdata.presence_penalty
     }, {
       headers: { 'content-type': 'application/json', 'Authorization': 'Bearer ' + props.api }
     }).then(res => {
       console.log('res:', res);
       let text = res.data.choices[0].text.replace("openai:", "").replace("openai：", "").replace(/(^！\n\n)/g, "").replace(/^\n|\n$/g, "").replace("A:", "").replace(/(^？\n\n)/g, "")
       console.log('text:', text);
+      props.setQuestion(store.getState().question + '\nA:' + text)
       newDiologList.pop();
       props.setDialogList([...newDiologList, { text, type: 'ingoing', isloading: false }])
       setBtnmsg('发送')
+    }).catch(rej => {
+      console.log(rej);
+      let text = rej.response.data.error.message;
+      newDiologList.pop();
+      props.setDialogList([...newDiologList, { text, type: 'ingoing', isloading: false }])
     })
   };
 
@@ -73,7 +85,7 @@ const mapStateToProps = state => {
     isreply: state.isreply,
     diologlist: state.diologlist,
     api: state.apikey,
-    mode: state.mode,
+    requestdata: state.requestdata,
     question: state.question
   }
 }

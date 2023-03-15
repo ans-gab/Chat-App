@@ -15,7 +15,7 @@ const ModeMsg = (props) => {
 
   return (
     <div className='mode-title'>
-      <Select defaultValue={props.requestdata.mode} style={{ width: 100, color: '#0c0c0c' }}
+      <Select defaultValue={props.requestdata.mode} style={{ color: '#0c0c0c' }}
         onChange={onselectChangerequest}
         options={[
           { value: 0, label: '问答模式' },
