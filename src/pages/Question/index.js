@@ -61,7 +61,7 @@ const Question = (props) => {
       setBtnmsg('发送')
     }).catch(rej => {
       console.log(rej);
-      let text = rej.response.data.error.message;
+      let text = rej.message;
       newDiologList.pop();
       props.setDialogList([...newDiologList, { text, type: 'ingoing', isloading: false }])
     })
