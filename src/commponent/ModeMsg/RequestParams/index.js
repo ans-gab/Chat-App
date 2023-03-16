@@ -65,7 +65,7 @@ const RequestParams = (props) => {
 
   return (
     <div className='setRequestParams'>
-      <SettingOutlined onClick={() => { setVisible(true); }} style={{ fontSize: 26, color: '#FFFFFF' }} />
+      <SettingOutlined onClick={() => { setVisible(true); }} style={{ fontSize: 26, color: '#6e6a6a' }} />
       <Modal forceRender open={visible} onOk={onSure} onCancel={onClose}>
         <Form form={form}>
           <Form.Item label="选择模型">
