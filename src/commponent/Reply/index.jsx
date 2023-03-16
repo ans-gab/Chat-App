@@ -1,14 +1,20 @@
-import React from 'react'
+import React, { useRef,useEffect } from 'react'
 import { Typography } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import { changeReply } from '../../store/actionCreators';
 import { connect } from 'react-redux'
 
 const Reply = (props) => {
-
   const { Paragraph } = Typography;
+  const divRef = useRef();
+  useEffect (()=>{
+    const div = divRef.current;
+    if(div.scrollHeight>div.clientHeight){
+      div.scrollTop = div.scrollHeight - div.clientHeight;
+    }
+  })
   return (
-    <div className='dialog-list'>
+    <div className='dialog-list' ref={divRef}>
       {
         props.diologlist.map((item, index) => {
           return (
@@ -48,6 +54,6 @@ const mapDispatchToProps = dispatch => {
       dispatch(changeReply(num))
     }
   }
-
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(Reply)
