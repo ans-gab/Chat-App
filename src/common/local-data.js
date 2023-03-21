@@ -40,3 +40,71 @@ export const requestModel = [{
   ]
 }
 ]
+
+export const example = [
+  {
+    title:'问答',
+    content:'根据现有知识回答问题',
+    imgsrc:`../../assets/homelist/chat2.png`
+  },
+  {
+    title:'语法修正',
+    content:'将句子改正标准英语',
+    imgsrc:'../../assets/homelist/modify.png'
+  },
+  {
+    title:'命令文本',
+    content:'将文本转换为变成命令',
+    imgsrc:'../../assets/homelist/codepen.png'
+  },
+  {
+    title:'翻译语言',
+    content:'将文本翻译成其他语种语言',
+    imgsrc:'../../assets/homelist/translate.png'
+  },
+  {
+    title:'SQL翻译',
+    content:'将自然语言翻译成SQL查询',
+    imgsrc:'../../assets/homelist/sql.png'
+  },
+  {
+    title:'电影到表情符号',
+    content:'将电影片名转换为表情符号',
+    imgsrc:'../../assets/homelist/movie.png'
+  },
+  {
+    title:'解释代码',
+    content:'解释一段复杂的代码',
+    imgsrc:'../../assets/homelist/explain.png'
+  },
+  {
+    title:'广告文案',
+    content:'将产品说明变成广告文案',
+    imgsrc:'../../assets/homelist/ad.png'
+  },
+  {
+    title:'SQL请求',
+    content:'创建简单的SQL请求',
+    imgsrc:'../../assets/homelist/MySQL.png'
+  },
+  {
+    title:'微型恐怖故事创作者',
+    content:'根据主题词输入创建两到三句话的简单恐怖故事',
+    imgsrc:'../../assets/homelist/creation.png'
+  },
+  {
+    title:'总结说明',
+    content:'将会议记录变成摘要',
+    imgsrc:'../../assets/homelist/conclusion.png'
+  },
+  {
+    title:'论文大纲',
+    content:'为研究主题生成大纲',
+    imgsrc:'../../assets/homelist/paper.png'
+  },
+  {
+    title:'餐厅评论',
+    content:'将几句话变成餐厅评论',
+    imgsrc:`../../assets/homelist/reply.png`
+  },
+]

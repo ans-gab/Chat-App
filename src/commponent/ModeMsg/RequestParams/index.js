@@ -66,7 +66,7 @@ const RequestParams = (props) => {
   return (
     <div className='setRequestParams'>
       <SettingOutlined onClick={() => { setVisible(true); }} style={{ fontSize: 26, color: '#6e6a6a' }} />
-      <Modal forceRender open={visible} onOk={onSure} onCancel={onClose}>
+      <Modal forceRender open={visible} onOk={onSure} onCancel={onClose} okText="确认" cancelText="取消">
         <Form form={form}>
           <Form.Item label="选择模型">
             <TreeSelect onSelect={onChangeMode}
@@ -88,7 +88,6 @@ const RequestParams = (props) => {
           <Form.Item label="presence_penalty（控制主题的重复度）">
             <InputNumber min={-2} max={2} defaultValue={currentdata.presence_penalty} onChange={onChangePresence} />
           </Form.Item>
-
         </Form>
       </Modal>
     </div>
