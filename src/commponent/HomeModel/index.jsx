@@ -1,5 +1,5 @@
 import React from 'react'
-import { Avatar,List } from 'antd'
+import { Avatar,List,Image } from 'antd'
 import { example } from '../../common/local-data'
 import './index.css'
 
@@ -20,7 +20,8 @@ const HomeModel = () => {
       <List.Item>
         <List.Item.Meta
           style={{alignItems:'center'}}
-          avatar={<img width={35} src={require('../../assets/homelist/explain.png')} alt={item.title} /> }
+          avatar={<Image width={35} src={item.imgsrc}/>}
+          // avatar={<Avatar src={`${item.imgsrc}`} /> }
           title={<a href={item.imgsrc}>{item.title}</a>}
           description={item.content}
         />

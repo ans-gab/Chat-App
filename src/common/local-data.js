@@ -45,7 +45,7 @@ export const example = [
   {
     title:'问答',
     content:'根据现有知识回答问题',
-    imgsrc:`../../assets/homelist/chat2.png`
+    imgsrc:'../../assets/homelist/chat2.png'
   },
   {
     title:'语法修正',
