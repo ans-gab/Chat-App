@@ -1,30 +1,49 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { CommentOutlined, HomeOutlined, AreaChartOutlined, UserOutlined } from '@ant-design/icons'
+import { TabBar } from 'antd-mobile'
+import {
+  useNavigate, useLocation
+} from 'react-router-dom'
+import { MessageOutline, AppOutline, PictureOutline, UserOutline } from 'antd-mobile-icons'
 import './index.css'
 export const Footer = () => {
+  const navigate = useNavigate()
+  const location = useLocation()
+  const { pathname } = location
+
+  const setRouteActive = (value) => {
+    navigate(value)
+  }
+  const tabs = [
+    {
+      key: '/home',
+      title: '首页',
+      icon: <AppOutline />,
+    },
+    {
+      key: '/createimg',
+      title: '绘图',
+      icon: <PictureOutline />,
+    },
+    {
+      key: '/question',
+      title: '提问',
+      icon: <MessageOutline />,
+    },
+    {
+      key: '/me',
+      title: '我的',
+      icon: <UserOutline />,
+    },
+  ]
   return (
     <div className='footer'>
-      <ul className='footer-ul'>
-        <NavLink to="/home" className={({ isActive }) =>
-          isActive ? 'footer-ul-li active' : 'footer-ul-li'}>
-          <HomeOutlined style={{ fontSize: 26 }} />
-          <span>首页</span>
-        </NavLink>
-        <NavLink to="/createimg" className='footer-ul-li'>
-          <AreaChartOutlined style={{ fontSize: 26 }} />
-          <span>绘图</span>
-        </NavLink>
-        <NavLink to="/question" className='footer-ul-li'>
-          {/* <FontAwesomeIcon icon={faQuestionCircle} /> */}
-          <CommentOutlined style={{ fontSize: 26 }} />
-          <span>提问</span>
-        </NavLink>
-        <NavLink to="/mine" className='footer-ul-li'>
-          <UserOutlined style={{ fontSize: 26 }} />
-          <span>我的</span>
-        </NavLink>
-      </ul>
+
+      <TabBar activeKey={pathname} onChange={value => setRouteActive(value)}>
+        {tabs.map(item => (
+          <TabBar.Item key={item.key} icon={item.icon} title={item.title} />
+        ))}
+      </TabBar>
+
     </div>
   );
 }

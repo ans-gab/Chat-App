@@ -2,6 +2,7 @@
   display: flex;
   flex-wrap: wrap;
 }
+
 .modeel-item {
   align-items: center;
   display: flex;
@@ -12,7 +13,12 @@
   background-color: #00adae;
   width: 29%;
 }
+
 div#scrollableDiv {
   height: 89vh;
   background: #ffffff;
+}
+
+.example-title {
+  text-decoration: none;
 }

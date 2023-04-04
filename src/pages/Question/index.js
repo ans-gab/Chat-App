@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import store from '../../store';
 import { Input, Button } from 'antd'
-import { DeleteOutlined } from '@ant-design/icons'
+import { DeleteOutline } from 'antd-mobile-icons'
 import axios from 'axios'
 import Reply from '../../commponent/Reply';
 import ModeMsg from '../../commponent/ModeMsg';
@@ -35,16 +35,23 @@ const Question = (props) => {
       isloading: true
     }];
     if (props.requestdata.mode === 0) {
+      props.setDialogList([{ text: '你好，很高兴为你服务！', isloading: false, type: 'ingoing' }, {
+        text: inputValue,
+        type: 'outgoing',
+        isloading: false
+      }, {
+        type: 'incoming',
+        isloading: true
+      }])
       props.setQuestion(inputValue)
       console.log(store.getState().question);
     }
     else {
+      props.setDialogList(newDiologList);
       props.setQuestion(props.question + '\nQ:' + inputValue)
       console.log(store.getState().question);
 
     }
-
-    props.setDialogList(newDiologList);
     setInputValue('');
     setBtnmsg('请求中');
     axios.post('https://api.openai.com/v1/completions', {
@@ -62,8 +69,16 @@ const Question = (props) => {
       let text = res.data.choices[0].text.replace("openai:", "").replace("openai：", "").replace(/(^！\n\n)/g, "").replace(/^\n|\n$/g, "").replace("A:", "").replace(/(^？\n\n)/g, "")
       console.log('text:', text);
       props.setQuestion(store.getState().question + '\nA:' + text)
-      newDiologList.pop();
-      props.setDialogList([...newDiologList, { text, type: 'ingoing', isloading: false }])
+      // 如果是问答模式
+      if (props.requestdata.mode === 0) {
+        store.getState().diologlist.pop()
+        props.setDialogList([...store.getState().diologlist, { text, type: 'ingoing', isloading: false }])
+      }
+      else {
+        newDiologList.pop();
+        props.setDialogList([...newDiologList, { text, type: 'ingoing', isloading: false }])
+      }
+
       setBtnmsg('发送')
     }).catch(rej => {
       console.log(rej);
@@ -79,7 +94,7 @@ const Question = (props) => {
       <Reply />
       <div className='input-form'>
         <Input.Group compact className='input-form' >
-          <DeleteOutlined style={{ fontSize: 25, marginRight: 5, marginTop: 5, color: 'rgb(0 173 174)' }} onClick={() => { props.setDialogList(defaultDiologList); }} />
+          <DeleteOutline style={{ fontSize: 25, marginRight: 5, marginTop: 5, color: 'rgb(0 173 174)' }} onClick={() => { props.setDialogList(defaultDiologList); }} />
           <Input placeholder='你可以问我任何问题' disabled={btnmsg === "请求中"} style={{ width: 'calc(100% - 7rem)' }} type="text" value={inputValue} onChange={handleInputChange} onPressEnter={handleDialogInput} />
           <Button disabled={btnmsg === "请求中"} style={{ width: '5rem', backgroundColor: "#00adae", color: "#ffffff" }} onClick={handleDialogInput}>{btnmsg}</Button>
         </Input.Group>

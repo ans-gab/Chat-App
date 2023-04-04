@@ -1,5 +1,5 @@
 import React from 'react'
-import { List, Avatar } from 'antd'
+import { List, Image } from 'antd-mobile'
 import { connect } from 'react-redux'
 import { example } from '../../common/local-data'
 import './index.css'
@@ -9,20 +9,26 @@ import { changeExample } from '../../store/actionCreators'
 const HomeModel = (props) => {
   return (
     <div id="scrollableDiv" style={{ overflow: 'auto', padding: '0 16px', border: '1px solid rgba(140, 140, 140, 0.35)', }}>
-      <List
-        itemLayout="horizontal"
-        dataSource={example}
-        renderItem={(item, index) => (
-          <List.Item onClick={() => { props.setExample(item); }}>
-            <List.Item.Meta
-              style={{ alignItems: 'center' }}
-              avatar={<Avatar shape='square' src={item.imgsrc} />}
-              title={<NavLink to="/example">{item.title}</NavLink>}
-              description={item.description}
-            />
+      <List header='官网示例列表'>
+        {example.map((item, index) => (
+          <List.Item
+            key={index}
+            prefix={
+              <Image
+                src={item.imgsrc}
+                fit='cover'
+                width={40}
+                height={40}
+              />
+            }
+            description={item.description}
+            onClick={() => { props.setExample(item) }}
+          >
+            <NavLink className="example-title" to="/example">{item.title}</NavLink>
           </List.Item>
-        )}
-      />
+        ))}
+      </List>
+
     </div>
   )
 }
