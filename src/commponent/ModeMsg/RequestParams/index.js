@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { changeRequest } from '../../../store/actionCreators';
 import './index.css'
 const RequestParams = (props) => {
+
   const [form] = Form.useForm();
 
   // 设置当前选中参数的对象；
@@ -13,11 +14,6 @@ const RequestParams = (props) => {
 
   // 设置参数弹窗是否可见
   const [visible, setVisible] = React.useState(false);
-  React.useEffect(() => {
-    if (visible) {
-      form.setFieldsValue({ user: "antd" });
-    }
-  }, [visible]);
 
   // 关闭弹窗
   const onClose = () => {
@@ -39,6 +35,8 @@ const RequestParams = (props) => {
   // 改变最大回复字数
   const onChangeMaxToken = (e) => {
     currentdata.max_tokens = e
+    props.setRequestHeader(currentdata)
+    console.log(props.requestdata.max_tokens);
   }
 
   // 改变temperature
@@ -66,7 +64,7 @@ const RequestParams = (props) => {
   return (
     <div className='setRequestParams'>
       <SettingOutlined onClick={() => { setVisible(true); }} style={{ fontSize: 26, color: '#6e6a6a' }} />
-      <Modal forceRender open={visible} onOk={onSure} onCancel={onClose} okText="确认" cancelText="取消">
+      <Modal forceRender open={visible} onOk={onSure} onCancel={onClose} cancelButtonProps={{ disabled: true }} okText="确认" cancelText="取消">
         <Form form={form}>
           <Form.Item label="选择模型">
             <TreeSelect onSelect={onChangeMode}

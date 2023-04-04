@@ -1,4 +1,4 @@
-import { CHANGE_DIOLOG_LIST, CHANGE_QUESTION, CHANGE_REPLY, CHANGE_REQUEST, CHANGE_TIMESLIMIT, SET_API } from "./constants";
+import { CHANGE_DIOLOG_LIST, CHANGE_EXAMPLE, CHANGE_QUESTION, CHANGE_REPLY, CHANGE_REQUEST, CHANGE_TIMESLIMIT, SET_API } from "./constants";
 
 export const changeReply = num => ({
   type: CHANGE_REPLY,
@@ -28,5 +28,10 @@ export const changeQuestion = text => ({
 
 export const changeRequest = ary => ({
   type: CHANGE_REQUEST,
+  ary
+})
+
+export const changeExample = ary => ({
+  type:CHANGE_EXAMPLE,
   ary
 })

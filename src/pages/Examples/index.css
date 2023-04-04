@@ -1,0 +1,48 @@
+.modal-dialog {
+  align-items: center;
+  display: flex;
+  outline: none;
+  /* pointer-events: none; */
+  flex-flow: column;
+  padding: 0 1.5rem;
+  margin-bottom: 3.4375rem;
+  padding-bottom: 1rem;
+}
+
+.details-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem;
+  border-bottom: 1px solid #d0d0d0;
+}
+
+.details-description {
+  text-align: left;
+  padding: 1rem;
+  width: 100%;
+  font-size: 1.0625rem;
+}
+
+.prompt {
+  white-space: pre-line;
+}
+
+.prompt,
+.response-text {
+  background: white;
+  padding: 1.25rem;
+  font-size: .875rem;
+  border-radius: 10px;
+  white-space: pre-line;
+}
+
+.body-large.bold {
+  margin: 15px 0px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.example-details-content {
+  width: 100%;
+}

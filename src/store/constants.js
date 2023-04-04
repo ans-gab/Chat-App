@@ -10,3 +10,5 @@ export const SET_API = "SET_API"
 export const CHANGE_QUESTION = "CHANGE_QUESTION"
 // 改变请求参数
 export const CHANGE_REQUEST = "CHANGE_REQUEST"
+// 改变例子的文本
+export const CHANGE_EXAMPLE = "CHANGE_EXAMPLE"
