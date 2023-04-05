@@ -17,6 +17,7 @@ const RequestParams = (props) => {
 
   // 关闭弹窗
   const onClose = () => {
+    props.setRequestHeader(currentdata)
     setVisible(false);
   }
 

@@ -14,6 +14,7 @@ const Reply = (props) => {
     }
   })
   return (
+    
     <div className='dialog-list' ref={divRef}>
       {
         props.diologlist.map((item, index) => {
@@ -38,7 +39,6 @@ const Reply = (props) => {
         })
       }
     </div>
-
   )
 }
 const mapStateToProps = state => {

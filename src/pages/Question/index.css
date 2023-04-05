@@ -2,8 +2,9 @@
   position: fixed;
   left: 0;
   right: 0;
-  bottom: 5rem;
+  bottom: 4rem;
   padding: 0 1rem;
+  display: flex;
 
 }
 
@@ -95,7 +96,14 @@
 }
 
 .dialog-list {
-  height: 78vh;
+  height: 76vh;
   padding: .625rem;
   overflow: auto;
 }
+.requestInput{
+  background: white;
+  height: 2.375rem;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  padding: 0 5px;
+}   

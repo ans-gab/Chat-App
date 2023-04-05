@@ -48,3 +48,6 @@ img {
     flex-basis: 100%;
   }
 }
+:root:root {
+  --adm-color-primary: #00adae;
+}

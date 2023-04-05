@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import store from '../../store';
-import { Input, Button } from 'antd'
+import { Input, Button,PullToRefresh, Toast } from 'antd-mobile'
+import { sleep } from 'antd-mobile/es/utils/sleep'
 import { DeleteOutline } from 'antd-mobile-icons'
 import axios from 'axios'
 import Reply from '../../commponent/Reply';
@@ -13,8 +14,19 @@ const Question = (props) => {
   const [inputValue, setInputValue] = useState('');
   const [btnmsg, setBtnmsg] = useState('发送');
   const handleInputChange = (event) => {
-    setInputValue(event.target.value);
+    setInputValue(event);
   };
+
+  async function doRefresh() {
+    await sleep(1000)
+    props.setDialogList(defaultDiologList)
+    Toast.show({
+      icon: 'success',
+      content: '刷新成功',
+    })
+    throw new Error('刷新失败')
+  }
+
   // 初始化聊天内容
   const defaultDiologList = [
     { text: '你好，很高兴为你服务！', isloading: false, type: 'ingoing' },
@@ -24,7 +36,7 @@ const Question = (props) => {
     if (inputValue.trim() === '') {
       return;
     }
-    setInputValue(event.target.value);
+    setInputValue(event);
     // 新增聊天内容
     const newDiologList = [...props.diologlist, {
       text: inputValue,
@@ -91,13 +103,13 @@ const Question = (props) => {
   return (
     <div>
       <ModeMsg style={{ fontSize: 20 }} />
-      <Reply />
+      <PullToRefresh onRefresh={doRefresh}>
+        <Reply />
+      </PullToRefresh>
       <div className='input-form'>
-        <Input.Group compact className='input-form' >
           <DeleteOutline style={{ fontSize: 25, marginRight: 5, marginTop: 5, color: 'rgb(0 173 174)' }} onClick={() => { props.setDialogList(defaultDiologList); }} />
-          <Input placeholder='你可以问我任何问题' disabled={btnmsg === "请求中"} style={{ width: 'calc(100% - 7rem)' }} type="text" value={inputValue} onChange={handleInputChange} onPressEnter={handleDialogInput} />
+          <Input className='requestInput' placeholder='你可以问我任何问题' disabled={btnmsg === "请求中"} style={{ width: 'calc(100% - 7rem)',background:'' }} value={inputValue}  onChange={handleInputChange} onEnterPress={handleDialogInput} clearable />
           <Button disabled={btnmsg === "请求中"} style={{ width: '5rem', backgroundColor: "#00adae", color: "#ffffff" }} onClick={handleDialogInput}>{btnmsg}</Button>
-        </Input.Group>
       </div>
     </div>
   )
