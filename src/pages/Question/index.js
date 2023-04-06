@@ -9,6 +9,7 @@ import ModeMsg from '../../commponent/ModeMsg';
 import { changeDiologList, changeQuestion, changeReply } from '../../store/actionCreators';
 import { connect } from 'react-redux'
 import './index.css'
+import 'default-passive-events'
 
 const Question = (props) => {
   const [inputValue, setInputValue] = useState('');
