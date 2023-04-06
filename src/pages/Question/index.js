@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import store from '../../store';
-import { Input, Button,PullToRefresh, Toast } from 'antd-mobile'
+import { Input, Button, PullToRefresh, Toast } from 'antd-mobile'
 import { sleep } from 'antd-mobile/es/utils/sleep'
 import { DeleteOutline } from 'antd-mobile-icons'
 import axios from 'axios'
@@ -20,9 +20,10 @@ const Question = (props) => {
   async function doRefresh() {
     await sleep(1000)
     props.setDialogList(defaultDiologList)
+    props.setQuestion('')
     Toast.show({
       icon: 'success',
-      content: '刷新成功',
+      content: '已清空对话信息',
     })
     throw new Error('刷新失败')
   }
@@ -107,9 +108,9 @@ const Question = (props) => {
         <Reply />
       </PullToRefresh>
       <div className='input-form'>
-          <DeleteOutline style={{ fontSize: 25, marginRight: 5, marginTop: 5, color: 'rgb(0 173 174)' }} onClick={() => { props.setDialogList(defaultDiologList); }} />
-          <Input className='requestInput' placeholder='你可以问我任何问题' disabled={btnmsg === "请求中"} style={{ width: 'calc(100% - 7rem)',background:'' }} value={inputValue}  onChange={handleInputChange} onEnterPress={handleDialogInput} clearable />
-          <Button disabled={btnmsg === "请求中"} style={{ width: '5rem', backgroundColor: "#00adae", color: "#ffffff" }} onClick={handleDialogInput}>{btnmsg}</Button>
+        <DeleteOutline style={{ fontSize: 25, marginRight: 5, marginTop: 5, color: 'rgb(0 173 174)' }} onClick={() => { props.setDialogList(defaultDiologList); props.setQuestion('') }} />
+        <Input className='requestInput' placeholder='你可以问我任何问题' disabled={btnmsg === "请求中"} style={{ width: 'calc(100% - 7rem)', background: '' }} value={inputValue} onChange={handleInputChange} onEnterPress={handleDialogInput} clearable />
+        <Button disabled={btnmsg === "请求中"} style={{ width: '5rem', backgroundColor: "#00adae", color: "#ffffff" }} onClick={handleDialogInput}>{btnmsg}</Button>
       </div>
     </div>
   )
