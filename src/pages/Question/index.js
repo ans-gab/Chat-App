@@ -25,7 +25,6 @@ const Question = (props) => {
       icon: 'success',
       content: '已清空对话信息',
     })
-    throw new Error('刷新失败')
   }
 
   // 初始化聊天内容
