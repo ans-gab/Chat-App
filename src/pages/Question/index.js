@@ -22,6 +22,7 @@ const Question = (props) => {
     await sleep(1000)
     props.setDialogList(defaultDiologList)
     props.setQuestion('')
+    setBtnmsg('发送')
     Toast.show({
       icon: 'success',
       content: '已清空对话信息',
@@ -67,7 +68,7 @@ const Question = (props) => {
     }
     setInputValue('');
     setBtnmsg('请求中');
-    axios.post('https://api.openai.com/v1/completions', {
+    axios.post('https://service-o9a22oki-1258507939.hk.apigw.tencentcs.com/v1/completions', {
       prompt: store.getState().question,
       max_tokens: props.requestdata.max_tokens,
       model: props.requestdata.model,
@@ -108,7 +109,7 @@ const Question = (props) => {
         <Reply />
       </PullToRefresh>
       <div className='input-form'>
-        <DeleteOutline style={{ fontSize: 25, marginRight: 5, marginTop: 5, color: 'rgb(0 173 174)' }} onClick={() => { props.setDialogList(defaultDiologList); props.setQuestion('') }} />
+        <DeleteOutline style={{ fontSize: 25, marginRight: 5, marginTop: 5, color: 'rgb(0 173 174)' }} onClick={() => { props.setDialogList(defaultDiologList); props.setQuestion(''); setBtnmsg('发送') }} />
         <Input className='requestInput' placeholder='你可以问我任何问题' disabled={btnmsg === "请求中"} style={{ width: 'calc(100% - 7rem)', background: '' }} value={inputValue} onChange={handleInputChange} onEnterPress={handleDialogInput} clearable />
         <Button disabled={btnmsg === "请求中"} style={{ width: '5rem', backgroundColor: "#00adae", color: "#ffffff" }} onClick={handleDialogInput}>{btnmsg}</Button>
       </div>
