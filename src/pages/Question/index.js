@@ -68,7 +68,7 @@ const Question = (props) => {
     }
     setInputValue('');
     setBtnmsg('请求中');
-    axios.post('https://service-o9a22oki-1258507939.hk.apigw.tencentcs.com/v1/completions', {
+    axios.post('https://service-o9a22oki-1258507939.hk.apigw.tencentcs.com/release/v1/completions', {
       prompt: store.getState().question,
       max_tokens: props.requestdata.max_tokens,
       model: props.requestdata.model,
@@ -97,6 +97,7 @@ const Question = (props) => {
     }).catch(rej => {
       console.log(rej);
       let text = rej.message;
+      setBtnmsg('发送');
       newDiologList.pop();
       props.setDialogList([...newDiologList, { text, type: 'ingoing', isloading: false }])
     })
