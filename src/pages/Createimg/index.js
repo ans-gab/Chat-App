@@ -5,7 +5,6 @@ import axios from 'axios'
 import './index.css'
 
 const Createimg = () => {
-  const { Search } = Input;
   const [imgdes, setImgDes] = useState('');
   const [imglist, setImglist] = useState([]);
   const [isloading, setLoading] = useState();

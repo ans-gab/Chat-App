@@ -96,7 +96,7 @@ const Question = (props) => {
       setBtnmsg('发送')
     }).catch(rej => {
       console.log(rej);
-      let text = rej.message;
+      let text = rej.message + '\n\n请检查ApiKey是否有误！';
       setBtnmsg('发送');
       newDiologList.pop();
       props.setDialogList([...newDiologList, { text, type: 'ingoing', isloading: false }])

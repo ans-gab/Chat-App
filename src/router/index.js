@@ -7,6 +7,9 @@ import Mine from "../pages/Mine";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Example from "../pages/Examples";
+import Instructions from "../pages/Instructions";
+import Suggest from "../pages/Suggest";
+import Log from "../pages/Log";
 
 // 注意！！！ element 的首字母一定要是小写，否则不会生效
 const routes = [
@@ -39,7 +42,19 @@ const routes = [
   }, {
     path: "example",
     element: <Example />
+  }, {
+    path: "/instruction",
+    element: <Instructions />
+  },
+  {
+    path: "/log",
+    element: <Log />
+  },
+  {
+    path: "/suggest",
+    element: <Suggest />
   }
+
 ]
 
 export default routes

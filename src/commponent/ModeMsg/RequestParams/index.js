@@ -72,7 +72,7 @@ const RequestParams = (props) => {
               treeData={requestModel} defaultValue={currentdata.model}
             />
           </Form.Item>
-          <Form.Item label="最大回复字数">
+          <Form.Item label="MaxTokens(最大回复字数)">
             <InputNumber min={50} max={4000} defaultValue={currentdata.max_tokens} onChange={onChangeMaxToken} />
           </Form.Item>
           <Form.Item label="temperature(随机因子)">

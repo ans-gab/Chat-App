@@ -1,0 +1,5 @@
+.instruction-text {
+  max-height: 90vh;
+  overflow: auto;
+  white-space: pre-line;
+}

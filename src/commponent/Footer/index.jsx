@@ -30,7 +30,7 @@ export const Footer = () => {
       icon: <MessageOutline />,
     },
     {
-      key: '/me',
+      key: '/mine',
       title: '我的',
       icon: <UserOutline />,
     },

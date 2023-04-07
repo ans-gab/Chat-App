@@ -10,6 +10,7 @@ import { ConfigProvider } from 'antd';
 
 
 const App = () => {
+
   return (
 
     <div className="contain">
@@ -36,5 +37,7 @@ const App = () => {
 
   )
 }
+
+
 
 export default App
