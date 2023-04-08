@@ -12,3 +12,7 @@ export const CHANGE_QUESTION = "CHANGE_QUESTION"
 export const CHANGE_REQUEST = "CHANGE_REQUEST"
 // 改变例子的文本
 export const CHANGE_EXAMPLE = "CHANGE_EXAMPLE"
+// 改变消息
+export const CHANGE_MESSAGE = "CHANGE_MESSAGE"
+// 改变AI人设
+export const CHANGE_SYSTEM = "CHANGE_SYSTEM"

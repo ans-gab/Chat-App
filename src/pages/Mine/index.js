@@ -29,8 +29,8 @@ const Mine = (props) => {
   const onChipClick = (item, index) => {
     navigate(item.url)
   }
+  // 获取cookie,并设置apikey
   useEffect(() => {
-    // 获取cookie,并设置apikey
     if (cookie.load('apikey')) {
       props.setApi(cookie.load('apikey'))
     }

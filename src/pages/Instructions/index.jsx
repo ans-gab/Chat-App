@@ -17,7 +17,7 @@ const Instructions = () => {
   return (
     <div className='instruction-text' >
       <Card title='模型说明' headerStyle={{ border: 'none' }}>
-        <Collapse defaultActiveKey={['text-davinci-003']}>
+        <Collapse defaultActiveKey={['gpt-3.-turbo']}>
           {
             renderTreeNodes(requestModel)
           }

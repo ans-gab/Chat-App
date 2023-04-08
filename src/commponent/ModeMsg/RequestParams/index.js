@@ -1,9 +1,10 @@
 import React from 'react'
-import { Form, Modal, InputNumber, TreeSelect } from 'antd';
+import { Form, Modal, InputNumber, TreeSelect, Input } from 'antd';
 import { SettingOutlined } from '@ant-design/icons';
 import { requestModel } from '../../../common/local-data';
 import { connect } from 'react-redux';
-import { changeRequest } from '../../../store/actionCreators';
+import { changeSystem, changeRequest } from '../../../store/actionCreators';
+import store from '../../../store';
 import './index.css'
 const RequestParams = (props) => {
 
@@ -15,6 +16,8 @@ const RequestParams = (props) => {
   // 设置参数弹窗是否可见
   const [visible, setVisible] = React.useState(false);
 
+  // 是否隐藏AI人设
+  const [hidinput, setHidinput] = React.useState(true)
   // 关闭弹窗
   const onClose = () => {
     props.setRequestHeader(currentdata)
@@ -28,9 +31,27 @@ const RequestParams = (props) => {
     setVisible(false);
   }
 
+  // 遍历模型数据
+  const renderRequestData = (data) =>
+    data.map((item) => {
+      if (item.children) {
+        renderRequestData(item.children)
+      }
+      if (item.title === currentdata.model) {
+        currentdata.preurl = item.preurl
+      }
+    })
+
   // 选中参数时模型时发生的回调
   const onChangeMode = (e) => {
-    currentdata.model = e
+    currentdata.model = e;
+    renderRequestData(requestModel);
+    if (e === 'gpt-3.5-turbo') {
+      setHidinput(false)
+    }
+    else {
+      setHidinput(true)
+    }
   }
 
   // 改变最大回复字数
@@ -60,7 +81,11 @@ const RequestParams = (props) => {
     currentdata.presence_penalty = e
   }
 
-  // 改变tem
+  // 改变AI人设
+  const onChangeSystem = (e) => {
+    props.setSystem(e.target.value)
+
+  }
 
   return (
     <div className='setRequestParams'>
@@ -71,6 +96,9 @@ const RequestParams = (props) => {
             <TreeSelect onSelect={onChangeMode}
               treeData={requestModel} defaultValue={currentdata.model}
             />
+          </Form.Item>
+          <Form.Item label="AI人设" >
+            <Input defaultValue={props.system} onChange={onChangeSystem} disabled={hidinput} />
           </Form.Item>
           <Form.Item label="MaxTokens(最大回复字数)">
             <InputNumber min={50} max={4000} defaultValue={currentdata.max_tokens} onChange={onChangeMaxToken} />
@@ -89,20 +117,24 @@ const RequestParams = (props) => {
           </Form.Item>
         </Form>
       </Modal>
-    </div>
+    </div >
 
   )
 }
 
 const mapStateToProps = state => {
   return {
-    requestdata: state.requestdata
+    requestdata: state.requestdata,
+    system: state.system
   }
 }
 const mapDishpatchToProps = dispatch => {
   return {
     setRequestHeader: function (ary) {
       dispatch(changeRequest(ary))
+    },
+    setSystem: function (text) {
+      dispatch(changeSystem(text))
     }
   };
 

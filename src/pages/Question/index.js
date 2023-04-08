@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import store from '../../store';
 import { Input, Button, PullToRefresh, Toast } from 'antd-mobile'
 import { sleep } from 'antd-mobile/es/utils/sleep'
@@ -6,10 +6,10 @@ import { DeleteOutline } from 'antd-mobile-icons'
 import axios from 'axios'
 import Reply from '../../commponent/Reply';
 import ModeMsg from '../../commponent/ModeMsg';
-import { changeDiologList, changeQuestion, changeReply } from '../../store/actionCreators';
+import { changeDiologList, changeQuestion, changeReply, setApi, changeMessage } from '../../store/actionCreators';
 import { connect } from 'react-redux'
+import cookie from 'react-cookies'
 import './index.css'
-import 'default-passive-events'
 
 const Question = (props) => {
   const [inputValue, setInputValue] = useState('');
@@ -17,7 +17,11 @@ const Question = (props) => {
   const handleInputChange = (event) => {
     setInputValue(event);
   };
-
+  useEffect(() => {
+    if (cookie.load('apikey')) {
+      props.setApi(cookie.load('apikey'))
+    }
+  }, [])
   async function doRefresh() {
     await sleep(1000)
     props.setDialogList(defaultDiologList)
@@ -34,41 +38,18 @@ const Question = (props) => {
     { text: '你好，很高兴为你服务！', isloading: false, type: 'ingoing' },
     { text: '已请空会话', isloading: false, type: 'ingoing' },
   ]
-  const handleDialogInput = (event) => {
-    if (inputValue.trim() === '') {
-      return;
-    }
-    setInputValue(event);
-    // 新增聊天内容
-    const newDiologList = [...props.diologlist, {
-      text: inputValue,
-      type: 'outgoing',
-      isloading: false
-    }, {
-      type: 'incoming',
-      isloading: true
-    }];
-    if (props.requestdata.mode === 0) {
-      props.setDialogList([{ text: '你好，很高兴为你服务！', isloading: false, type: 'ingoing' }, {
-        text: inputValue,
-        type: 'outgoing',
-        isloading: false
-      }, {
-        type: 'incoming',
-        isloading: true
-      }])
-      props.setQuestion(inputValue)
-      console.log(store.getState().question);
-    }
-    else {
-      props.setDialogList(newDiologList);
-      props.setQuestion(props.question + '\nQ:' + inputValue)
-      console.log(store.getState().question);
-
-    }
-    setInputValue('');
-    setBtnmsg('请求中');
-    axios.post('https://service-o9a22oki-1258507939.hk.apigw.tencentcs.com/release/v1/completions', {
+  // 新增聊天内容
+  const newDiologList = [...props.diologlist, {
+    text: inputValue,
+    type: 'outgoing',
+    isloading: false
+  }, {
+    type: 'incoming',
+    isloading: true
+  }];
+  // 3.5模型以下的网络请求
+  const requestmodel3 = () => {
+    axios.post(props.funUrl + props.requestdata.preurl, {
       prompt: store.getState().question,
       max_tokens: props.requestdata.max_tokens,
       model: props.requestdata.model,
@@ -80,7 +61,7 @@ const Question = (props) => {
       headers: { 'content-type': 'application/json', 'Authorization': 'Bearer ' + props.api }
     }).then(res => {
       console.log('res:', res);
-      let text = res.data.choices[0].text.replace("openai:", "").replace("openai：", "").replace(/(^！\n\n)/g, "").replace(/^\n|\n$/g, "").replace("A:", "").replace(/(^？\n\n)/g, "")
+      let text = res.data.choices[0].text.replace(/openai:|openai：|A:|(^！\n\n)|(^？\n\n)|(\n\n$)|(^\n|\n$)|(^\n\n)/g, "").trim();
       console.log('text:', text);
       props.setQuestion(store.getState().question + '\nA:' + text)
       // 如果是问答模式
@@ -101,6 +82,111 @@ const Question = (props) => {
       newDiologList.pop();
       props.setDialogList([...newDiologList, { text, type: 'ingoing', isloading: false }])
     })
+  }
+  // 3.5模型及以上的网络请求
+  const requestmodel3_5 = () => {
+    axios.post(props.funUrl + props.requestdata.preurl, {
+      messages: store.getState().message,
+      max_tokens: props.requestdata.max_tokens,
+      model: props.requestdata.model,
+      temperature: props.requestdata.temperature,
+      top_p: props.requestdata.top_p,
+      frequency_penalty: props.requestdata.frequency_penalty,
+      presence_penalty: props.requestdata.presence_penalty
+    }, {
+      headers: { 'content-type': 'application/json', 'Authorization': 'Bearer ' + props.api }
+    }).then(res => {
+      console.log('res:', res);
+      let text = res.data.choices[0].message.content.replace(/openai:|openai：|A:|(^！\n\n)|(^？\n\n)|(\n\n$)|(^\n|\n$)|(^\n\n)/g, "").trim();
+      console.log('text:', text);
+      props.setMessage([...store.getState().message, { role: 'assistant', content: text }])
+      // 如果是问答模式
+      if (props.requestdata.mode === 0) {
+        store.getState().diologlist.pop()
+        props.setDialogList([...store.getState().diologlist, { text, type: 'ingoing', isloading: false }])
+      }
+      else {
+        newDiologList.pop();
+        props.setDialogList([...newDiologList, { text, type: 'ingoing', isloading: false }])
+      }
+
+      setBtnmsg('发送')
+    }).catch(rej => {
+      console.log(rej);
+      let text = rej.message + '\n请检查ApiKey是否有误！';
+      setBtnmsg('发送');
+      newDiologList.pop();
+      props.setDialogList([...newDiologList, { text, type: 'ingoing', isloading: false }])
+    })
+  }
+
+  // 3.0以下设置提问内容
+  const handleSetQuestion = () => {
+    if (props.requestdata.mode === 0) {
+      props.setDialogList([{ text: '你好，很高兴为你服务！', isloading: false, type: 'ingoing' }, {
+        text: inputValue,
+        type: 'outgoing',
+        isloading: false
+      }, {
+        type: 'incoming',
+        isloading: true
+      }])
+      props.setQuestion(inputValue)
+      console.log(store.getState().question);
+    }
+    else {
+      props.setDialogList(newDiologList);
+      props.setQuestion(props.question + '\nQ:' + inputValue)
+      console.log(store.getState().question);
+    }
+  }
+
+  // 3.5及以上设置请求体
+  const handleSetMessage = () => {
+    if (props.requestdata.mode === 0) {
+      props.setDialogList([{ text: '你好，很高兴为你服务！', isloading: false, type: 'ingoing' }, {
+        text: inputValue,
+        type: 'outgoing',
+        isloading: false
+      }, {
+        type: 'incoming',
+        isloading: true
+      }])
+      props.setMessage([{
+        role: 'system',
+        content: store.getState().system
+      },
+      {
+        role: 'user',
+        content: inputValue
+      }
+      ])
+      console.log(store.getState().message);
+    }
+    else {
+      props.setDialogList(newDiologList);
+      props.message.shift();
+      props.setMessage([{ role: 'system', content: store.getState().system }, ...props.message, { role: 'user', content: inputValue }])
+      console.log(store.getState().message);
+    }
+  }
+
+  const handleDialogInput = (event) => {
+    if (inputValue.trim() === '') {
+      return;
+    }
+    setInputValue(event);
+    setInputValue('');
+    setBtnmsg('请求中');
+
+    if (props.requestdata.model === 'gpt-3.5-turbo') {
+      handleSetMessage();
+      requestmodel3_5()
+    }
+    else {
+      handleSetQuestion();
+      requestmodel3()
+    }
   };
 
   return (
@@ -123,7 +209,9 @@ const mapStateToProps = state => {
     diologlist: state.diologlist,
     api: state.apikey,
     requestdata: state.requestdata,
-    question: state.question
+    question: state.question,
+    funUrl: state.funUrl,
+    message: state.message
   }
 }
 const mapDishpatchToProps = dispatch => {
@@ -136,6 +224,12 @@ const mapDishpatchToProps = dispatch => {
     },
     setQuestion: function (text) {
       dispatch(changeQuestion(text))
+    },
+    setApi: function (text) {
+      dispatch(setApi(text))
+    },
+    setMessage: function (ary) {
+      dispatch(changeMessage(ary))
     }
   };
 

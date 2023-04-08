@@ -1,11 +1,12 @@
 import React from 'react'
-import { Collapse, Card } from 'antd-mobile'
+import { Collapse, Card, Tag } from 'antd-mobile'
 import { updatalog } from '../../common/updataLog'
 import './index.css'
 const Log = () => {
   const renderTreeNodes = (data) =>
     data.map((item, index) => {
-      return <Collapse.Panel key={index} title={item.title}>
+      return <Collapse.Panel key={index} title={item.title} style={{ fontSize: 16 }}
+        arrow={active => (active ? <Tag round color='#2db7f5'>{item.date}</Tag> : <Tag round color='#00adae'>{item.date}</Tag>)}>
         {item.content}
       </Collapse.Panel>;
     });
