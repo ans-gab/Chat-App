@@ -68,3 +68,30 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+### 发起提问之前需要先设置自己的api-key
+
+在“我的”页面设置api-key
+
+### 页面概览
+
+chat.vuestyle.com
+
+![image](https://github.com/ans-gab/Chat-App/assets/73372448/a4331c18-8c28-4e9d-b71b-8d4b9aa951b6)
+
+![image](https://github.com/ans-gab/Chat-App/assets/73372448/7eda04ae-a5e4-4c31-9154-9d7ae7779dd6)
+
+![image](https://github.com/ans-gab/Chat-App/assets/73372448/ceb0c506-44fc-4dcb-bcd9-aa5a49218a11)
+
+
+
+
+
+
+
+
+
+
+
+
