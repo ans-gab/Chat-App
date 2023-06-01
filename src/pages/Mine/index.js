@@ -62,6 +62,7 @@ const Mine = (props) => {
                 cookie.remove('apikey');
                 cookie.save('apikey', store.getState().apikey);
               },
+              closeOnMaskClick: true,
             })
           }}>
             设置ApiKey
