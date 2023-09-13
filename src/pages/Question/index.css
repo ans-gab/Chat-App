@@ -97,7 +97,7 @@
 }
 
 .dialog-list {
-  height: 76vh;
+  height: 42rem;
   padding: .625rem;
   overflow: auto;
 }
@@ -108,4 +108,10 @@
   border: 1px solid #d9d9d9;
   border-radius: 5px;
   padding: 0 5px;
+}
+
+.chat-content {
+  z-index: 10;
+  position: fixed;
+  width: 100%;
 }
