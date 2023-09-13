@@ -190,7 +190,7 @@ const Question = (props) => {
   };
 
   return (
-    <div>
+    <div className='chat-content'>
       <ModeMsg style={{ fontSize: 20 }} />
       <PullToRefresh onRefresh={doRefresh} pullingText={'下拉清空会话'} canReleaseText={'释放立即清空'} refreshingText={'清空中'}>
         <Reply />
