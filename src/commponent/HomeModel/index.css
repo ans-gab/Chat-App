@@ -15,8 +15,9 @@
 }
 
 div#scrollableDiv {
-  height: 89vh;
+  height: 43rem;
   background: #ffffff;
+  padding: 3rem 1rem;
 }
 
 .example-title {
