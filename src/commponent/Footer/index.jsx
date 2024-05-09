@@ -1,10 +1,11 @@
-import React from 'react';
+import React from 'react'
 import { TabBar } from 'antd-mobile'
 import {
   useNavigate, useLocation
 } from 'react-router-dom'
 import { MessageOutline, AppOutline, PictureOutline, UserOutline } from 'antd-mobile-icons'
 import './index.css'
+
 export const Footer = () => {
   const navigate = useNavigate()
   const location = useLocation()
@@ -17,33 +18,31 @@ export const Footer = () => {
     {
       key: '/home',
       title: '首页',
-      icon: <AppOutline />,
+      icon: <AppOutline />
     },
     {
-      key: '/createimg',
+      key: 'createimg',
       title: '绘图',
-      icon: <PictureOutline />,
+      icon: <PictureOutline />
     },
     {
       key: '/question',
       title: '提问',
-      icon: <MessageOutline />,
+      icon: <MessageOutline />
     },
     {
       key: '/mine',
       title: '我的',
-      icon: <UserOutline />,
-    },
+      icon: <UserOutline />
+    }
   ]
   return (
-    <div className='footer'>
-
+    <div className="footer">
       <TabBar activeKey={pathname} onChange={value => setRouteActive(value)}>
         {tabs.map(item => (
           <TabBar.Item key={item.key} icon={item.icon} title={item.title} />
         ))}
       </TabBar>
-
     </div>
-  );
+  )
 }
