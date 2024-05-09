@@ -9,14 +9,26 @@ import { changeExample } from '../../store/actionCreators'
 const HomeModel = (props) => {
   const navigate = useNavigate()
   return (
-    <div id="scrollableDiv" style={{ overflow: 'auto', padding: '0 16px', border: '1px solid rgba(140, 140, 140, 0.35)', }}>
-      <List header='官网示例列表'>
+    <div
+      id="scrollableDiv"
+      style={{
+        overflow: 'auto',
+        padding: '0 16px',
+        border: '1px solid rgba(140, 140, 140, 0.35)'
+      }}
+    >
+      <List header="官网示例列表">
         {example.map((item, index) => (
           <List.Item
             key={index}
-            prefix={<Image src={item.imgsrc} fit='cover' width={40} height={40} />}
+            prefix={
+              <Image src={item.imgsrc} fit="cover" width={40} height={40} />
+            }
             description={item.description}
-            onClick={() => { props.setExample(item); navigate('/example') }}
+            onClick={() => {
+              props.setExample(item)
+              navigate('/example')
+            }}
           >
             {item.title}
           </List.Item>
@@ -26,13 +38,13 @@ const HomeModel = (props) => {
   )
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     example: state.example
   }
 }
 
-const mapDishpatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     setExample: function (ary) {
       dispatch(changeExample(ary))
@@ -40,5 +52,4 @@ const mapDishpatchToProps = dispatch => {
   }
 }
 
-
-export default connect(mapStateToProps, mapDishpatchToProps)(HomeModel)
+export default connect(mapStateToProps, mapDispatchToProps)(HomeModel)
